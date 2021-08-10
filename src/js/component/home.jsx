@@ -1,26 +1,75 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+export default function App() {
+	const [inputValue, setInputValue] = useState("");
+	const [entradas, setEntradas] = useState([]);
 
-//create your first component
-const Home = () => {
+	useEffect(() => {
+		console.log(
+			"mi arreglo tiene",
+			entradas.length,
+			"elementos hasta el momento"
+		);
+	}, [entradas]);
+
+	const validateInput = () => {
+		if (inputValue === "") console.log("El input no puede estar vacio");
+		else console.log("Todo Perfecto");
+	};
+
+	let arreglo = [];
+
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div id="div1" className="container">
+			<h1 style={{ textAlign: "center" }}>To Do List</h1>
+			<div style={{ textAlign: "center" }}>
+				<input
+					className="form-control"
+					type="text"
+					placeholder="Nueva Tarea"
+					onChange={e => setInputValue(e.target.value)}
+					value={inputValue}
+				/>
+				<button
+					className="btn btn-primary"
+					type="button"
+					onClick={() => {
+						validateInput();
+						setEntradas([...entradas, inputValue]);
+					}}>
+					Agregar
+				</button>
+
+				<div
+					className="container "
+					style={{
+						textAlign: "center"
+					}}>
+					<ul className="list-group">
+						{entradas.map((index, key) => {
+							return (
+								<li
+									className="list-group-item list-group-item-action list-group-item-info"
+									key={key}>
+									{index}
+									<button className="btn">
+										<i
+											className="fas fa-trash-alt"
+											style={{ color: "red" }}
+										/>
+									</button>
+									<a
+										onClick={() => {
+											entradas.splice(key, 1);
+											setEntradas([...entradas]);
+											console.log(entradas);
+										}}></a>
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+			</div>
 		</div>
 	);
-};
-
-export default Home;
+}
