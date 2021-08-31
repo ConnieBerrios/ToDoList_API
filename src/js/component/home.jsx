@@ -54,15 +54,13 @@ export default function App() {
 									{index}
 									<button
 										style={{ marginLeft: "4px" }}
-										className="btn btn-light"
+										className="btn "
 										type="button"
 										onClick={() => {
 											const listaNueva = entradas.filter(
 												key => key !== index
 											);
 											setEntradas(listaNueva);
-											console.log(listaNueva);
-											console.log("hola");
 											//console.log(entrada)
 										}}>
 										<i
