@@ -52,18 +52,27 @@ export default function App() {
 									className="list-group-item list-group-item-action list-group-item-info"
 									key={key}>
 									{index}
-									<button className="btn">
+									<button
+										style={{ marginLeft: "4px" }}
+										className="btn btn-light"
+										type="button"
+										onClick={() => {
+											const listaNueva = entradas.filter(
+												key => key !== index
+											);
+											setEntradas(listaNueva);
+											console.log(listaNueva);
+											console.log("hola");
+											//console.log(entrada)
+										}}>
 										<i
 											className="fas fa-trash-alt"
-											style={{ color: "red" }}
+											style={{
+												color: "red"
+											}}
 										/>
 									</button>
-									<a
-										onClick={() => {
-											entradas.splice(key, 1);
-											setEntradas([...entradas]);
-											console.log(entradas);
-										}}></a>
+									<button className="btn"></button>
 								</li>
 							);
 						})}
